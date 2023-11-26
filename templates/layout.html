@@ -9,10 +9,16 @@
     <header>
         <a href='/' class='logo'>StellarPhysicsHub</a>
 	        <!-- Search Bar -->
-        <form action="/search" method="get">
-            <input type="search" name="query" placeholder="Search...">
-            <button type="submit">Search</button>
-        </form>
+		<form action="/search" method="get">
+    <input type="search" name="query" placeholder="Search..." list="search-options" autocomplete='off'>
+    <datalist id="search-options">
+        <option value="Big Dipper">
+        <option value='Little Dipper'>
+        <!-- Add more options as needed -->
+    </datalist>
+    <button type="submit">Search</button>
+</form>
+
         <nav>
             <ul class='nav_links'>
                 <li><a href='#'>Wiki</a></li>
