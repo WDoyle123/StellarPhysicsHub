@@ -1,0 +1,74 @@
+/* General Reset and Basic Styling */
+
+body, html {
+    height: 100%; /* Ensure the full height of the viewport is used */
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Monserrat, sans-serif;
+}
+
+body {
+    background-color: black;
+    color: #333;
+    line-height: 1.6;
+}
+
+main {
+    display: flex; /* Use Flexbox */
+    flex-direction: column; /* Stack children vertically */
+    justify-content: center; /* Center children vertically */
+    align-items: center; /* Center children horizontally */
+    height: calc(100vh - 60px); /* Full height minus header height, adjust as needed */
+    padding: 20px;
+    margin: 0 auto;
+    max-width: 800px;
+}
+
+.welcome-section, #stars-gif {
+    width: 100%; /* Full width within the main container */
+    max-width: 800px; /* Maximum width */
+    margin-bottom: 20px; /* Space between elements */
+    text-align:center;
+}
+
+.welcome-container {
+    background-color: #24252A; /* Same as the navigation bar */
+    border-radius: 10px; /* Rounded corners */
+    padding: 20px; /* Space around the welcome-section */
+    margin: 20px auto; /* Center the container */
+    max-width: 800px; /* Max width similar to the main content */
+}
+
+.welcome-section h1 {
+    color: #0077cc;
+    margin-bottom: 5px;
+    font-size:32px
+}
+
+.welcome-section h2 {
+	margin-bottom:15px;
+}
+
+/* Utility Classes */
+.container {
+    width: 90%;
+}
+
+#stars-gif {
+    display: block;
+    width: 100%; /* Sets the GIF to take the full width of the viewport */
+    height: auto; /* Keeps the aspect ratio of the GIF */
+    margin-top: 20px; /* Adds some space above the GIF */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        width: 90%;
+    }
+}
+

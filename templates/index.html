@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='index.css') }}">
+<main>
+    <div class="welcome-container">
+        <section class="welcome-section">
+            <h1>Welcome to StellarPhysicsHub</h1>
+            <p>Explore the wonders of the night sky with us! Learn more about the stars, dive into the mysteries of asterisms and constellations, and discover the intriguing attributes of celestial bodies. From the well-known Big Dipper to the less explored constellations, embark on an astronomical journey like no other.</p>
+        </section>
+    </div>
+
+    <img src="{{ url_for('static', filename='gifs/rotating_all_stars.gif') }}" alt="Rotating All Stars" id="stars-gif">
+
+</main>
+
+{% endblock %}
+

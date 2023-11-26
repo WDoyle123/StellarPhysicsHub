@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta name='viewport' content='initial-scale=1, width=device-width'>
+    <title>StellarPhysicsHub</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <a href='/' class='logo'>StellarPhysicsHub</a>
+	        <!-- Search Bar -->
+        <form action="/search" method="get">
+            <input type="search" name="query" placeholder="Search...">
+            <button type="submit">Search</button>
+        </form>
+        <nav>
+            <ul class='nav_links'>
+                <li><a href='#'>Wiki</a></li>
+                <li><a href='#'>Forum</a></li>
+                <li><a href='#'>Login</a></li>
+            </ul>
+        </nav>
+    </header>
+    {% block body %}{% endblock %}
+</body>
+</html>
+
