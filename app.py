@@ -43,9 +43,10 @@ class Star(db.Model):
 
 @app.route("/")
 def index():
-    constellations = Constellation.query.all()
-    asterisms = Asterism.query.all()
-    objects = asterisms + constellations
+    constellation_names = [constellation.name for constellation in Constellation.query.all()]
+    asterism_names = [asterism.name for asterism in Asterism.query.all()]
+    objects = asterism_names + constellation_names
+
     return render_template('index.html', objects=objects)
 
 @app.route('/contribute', methods=['GET', 'POST'])
@@ -77,18 +78,30 @@ def contribute():
         db.session.commit()
         return redirect(url_for('index'))
     else:
+        constellation_names = [constellation.name for constellation in Constellation.query.all()]
+        asterism_names = [asterism.name for asterism in Asterism.query.all()]
+        objects = asterism_names + constellation_names
+
         # GET request, just render the empty form
-        return render_template('contribute.html')
+        return render_template('contribute.html', objects=objects)
 
 @app.route('/constellation/<name>')
 def constellation(name):
+    constellation_names = [constellation.name for constellation in Constellation.query.all()]
+    asterism_names = [asterism.name for asterism in Asterism.query.all()]
+    objects = asterism_names + constellation_names
+
     constellation = Constellation.query.filter_by(name=name).first_or_404()
-    return render_template('body.html', body=constellation, of_type='Constellation')
+    return render_template('body.html', body=constellation, of_type='Constellation', objects=objects)
 
 @app.route('/asterism/<name>')
 def asterism(name):
+    constellation_names = [constellation.name for constellation in Constellation.query.all()]
+    asterism_names = [asterism.name for asterism in Asterism.query.all()]
+    objects = asterism_names + constellation_names
+
     asterism = Asterism.query.filter_by(name=name).first_or_404()
-    return render_template('body.html', body=asterism, of_type='Asterism')
+    return render_template('body.html', body=asterism, of_type='Asterism', objects=objects)
 
 @app.route("/search")
 def search():
@@ -111,7 +124,8 @@ def search():
 def wiki():
     constellation_names = [constellation.name for constellation in Constellation.query.all()]
     asterism_names = [asterism.name for asterism in Asterism.query.all()]
-    return render_template('wiki.html', constellation_names=constellation_names, asterism_names=asterism_names)
+    objects = asterism_names + constellation_names
+    return render_template('wiki.html', constellation_names=constellation_names, asterism_names=asterism_names,objects=objects)
 
 with app.app_context():
     db.create_all()

@@ -13,7 +13,7 @@
     <input type="search" name="query" placeholder="Search..." list="search-options" autocomplete='off'>
     <datalist id="search-options">
     {% for object in objects %}
-    <option value='{{ object.name }}'>
+    <option value='{{ object }}'>
     {% endfor %}
     </datalist>
     <button type="submit">Search</button>
