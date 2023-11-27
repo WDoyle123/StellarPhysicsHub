@@ -12,9 +12,9 @@
 		<form action="/search" method="get">
     <input type="search" name="query" placeholder="Search..." list="search-options" autocomplete='off'>
     <datalist id="search-options">
-        <option value="Big Dipper">
-        <option value='Little Dipper'>
-        <!-- Add more options as needed -->
+    {% for object in objects %}
+    <option value='{{ object.name }}'>
+    {% endfor %}
     </datalist>
     <button type="submit">Search</button>
 </form>

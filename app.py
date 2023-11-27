@@ -1,5 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
+
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///objects.db'
@@ -41,7 +43,10 @@ class Star(db.Model):
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    constellations = Constellation.query.all()
+    asterisms = Asterism.query.all()
+    objects = asterisms + constellations
+    return render_template('index.html', objects=objects)
 
 @app.route('/contribute', methods=['GET', 'POST'])
 def contribute():
@@ -75,21 +80,34 @@ def contribute():
         # GET request, just render the empty form
         return render_template('contribute.html')
 
-@app.route('/big_dipper')
-def big_dipper():
-    return render_template('big_dipper.html')
+@app.route('/constellation/<name>')
+def constellation(name):
+    constellation = Constellation.query.filter_by(name=name).first_or_404()
+    return render_template('body.html', body=constellation, of_type='Constellation')
+
+@app.route('/asterism/<name>')
+def asterism(name):
+    asterism = Asterism.query.filter_by(name=name).first_or_404()
+    return render_template('body.html', body=asterism, of_type='Asterism')
 
 @app.route("/search")
 def search():
-    query = request.args.get('query')
-    # Logic to decide where to redirect based on the query
-    if query.lower() == 'big dipper':
-        return redirect(url_for('big_dipper'))
-    # Add more conditions for other searches or a default search result
-    else:
-        # Redirect to a default page or show search results
-        return redirect(url_for('index'))
+    query = request.args.get('query').strip()
+
+    # Check if the query matches a constellation
+    constellation = Constellation.query.filter_by(name=query).first()
+    if constellation:
+        return redirect(url_for('constellation', name=constellation.name))
+
+    # Check if the query matches an asterism
+    asterism = Asterism.query.filter_by(name=query).first()
+    if asterism:
+        return redirect(url_for('asterism', name=asterism.name))
+
+    # If no matches, redirect to a default page or search results
+    return redirect(url_for('index'))  # Or a different route for search results
 
 with app.app_context():
     db.create_all()
 
+migrate = Migrate(app, db)
