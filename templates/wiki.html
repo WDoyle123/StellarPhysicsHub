@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='contribute.css') }}">
+<main>
+    <div class="welcome-container">
+        <section class="welcome-section">
+            <h1>Constellations</h1>
+            <ul>
+                {% for name in constellation_names %}
+                <li><a href="{{ url_for('constellation', name=name) }}">{{ name }}</a></li>
+                {% endfor %}
+            </ul>
+        </section>
+
+        <section class='welcome-section'>
+            <h1>Asterisms</h1>
+            <ul class=nav-links>
+                {% for name in asterism_names %}
+                <li><a href="{{ url_for('asterism', name=name) }}">{{ name }}</a></li>
+                {% endfor %}
+            </ul>
+        </section>
+    </div>
+</main>
+
+{% endblock %}
+

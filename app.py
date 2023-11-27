@@ -107,6 +107,12 @@ def search():
     # If no matches, redirect to a default page or search results
     return redirect(url_for('index'))  # Or a different route for search results
 
+@app.route('/wiki')
+def wiki():
+    constellation_names = [constellation.name for constellation in Constellation.query.all()]
+    asterism_names = [asterism.name for asterism in Asterism.query.all()]
+    return render_template('wiki.html', constellation_names=constellation_names, asterism_names=asterism_names)
+
 with app.app_context():
     db.create_all()
 
