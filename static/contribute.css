@@ -1,0 +1,123 @@
+/* General Reset and Basic Styling */
+body, html {
+    height: 100%; /* Ensure the full height of the viewport is used */
+    font-family: Monserrat, sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: black;
+    color: #333;
+    line-height: 1.6;
+}
+
+main {
+    display: flex; /* Use Flexbox */
+    flex-direction: column; /* Stack children vertically */
+    justify-content: center; /* Center children vertically */
+    align-items: center; /* Center children horizontally */
+    height: calc(100vh - 60px); /* Full height minus header height */
+    padding: 20px;
+    margin: 0 auto;
+    max-width: 800px;
+}
+
+.welcome-section, #stars-gif {
+    width: 100%; /* Full width within the main container */
+    margin-bottom: 20px; /* Space between elements */
+    text-align: center;
+}
+
+.welcome-container {
+    background-color: #24252A; /* Same as the navigation bar */
+    border-radius: 10px; /* Rounded corners */
+    padding: 20px; /* Space around the welcome-section */
+    margin: 20px auto; /* Center the container */
+    max-width: 800px; /* Max width */
+}
+
+.welcome-section h1 {
+    color: #0077cc;
+    margin-bottom: 5px;
+    font-size: 32px;
+}
+
+.welcome-section h2 {
+    margin-bottom: 15px;
+}
+
+.welcome-section ul {
+    list-style: none;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.form {
+	display:block;
+
+}
+
+/* Form Group Styling */
+.form-group {
+    margin-bottom: 15px; /* Space between form groups */
+    display: block; /* Ensure each group is on its own line */
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group input[type="text"],
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    display: block; /* Ensure block level */
+    color: black;
+}
+
+.form-group textarea.description-box {
+    height: 150px; /* Specific height for description box */
+}
+
+.form-group input[type="text"]:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: #4a90e2;
+    outline: none;
+}
+
+.form-group button[type="submit"] {
+    width: auto; /* Adjust width as needed */
+    padding: 10px 15px; /* Padding for better sizing */
+    margin-top: 10px; /* Space above the button */
+    border: none;
+    background-color: #4a90e2;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    display: block; /* Ensure block level */
+}
+
+.form-group button[type="submit"]:hover {
+    background-color: #357abd;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        width: 90%;
+    }
+}
+

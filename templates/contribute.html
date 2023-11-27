@@ -1,0 +1,53 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='contribute.css') }}">
+
+<main>
+    <div class="welcome-container">
+        <section class="welcome-section">
+            <h1>Contribute</h1>
+            <p>Help us expand our database by contributing information about constellations and asterisms. Please adhere to the following guidelines:</p>
+            <ul>
+                <li>Ensure that the name of the constellation or asterism is accurate and spelled correctly.</li>
+                <li>Provide a detailed and factual description.</li>
+                <li>List the stars in the constellation or asterism, separated by commas.</li>
+                <li>Include a valid URL for a related image or GIF, if available.</li>
+            </ul>
+            
+            <form class=form action="{{ url_for('contribute') }}" method="post">
+
+                <div class="form-group">
+                    <label for="body">Select Type:</label>
+                    <select name="body" id="body">
+                        <option value="constellation">Constellation</option>
+                        <option value="asterism">Asterism</option>
+		    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" placeholder="Big Dipper" required>
+                </div>
+
+		<div class="form-group">
+    <label for="description">Description:</label>
+    <textarea id="description" name="description" required placeholder="The Big Dipper is an asterism in the shape of a plough..."class="description-box"></textarea>
+</div>
+                <div class="form-group">
+                    <label for="stars_in_body">Stars (comma-separated):</label>
+                    <input type="text" id="stars_in_body" placeholder="Mizar,Magrez,Dubhe..." name="stars_in_body">
+                </div>
+                <div class="form-group">
+                    <label for="gif_url">Image/GIF URL:</label>
+                    <input type="text" id="gif_url" name="gif_url">
+                </div>
+                <button type="submit">Submit</button>
+            </form>
+        </section>
+    </div>
+</main>
+
+{% endblock %}
+
