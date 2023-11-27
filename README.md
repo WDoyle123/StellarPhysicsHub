@@ -21,7 +21,7 @@ To set up StellarPhysicsHub on your local machine, follow these steps:
 1. **Clone the Repository**:
    
     ```bash
-    git clone https://github.com/yourusername/StellarPhysicsHub.git
+    git clone https://github.com/WDoyle123/stellarphysicshub.git
     cd StellarPhysicsHub
     ```
 
