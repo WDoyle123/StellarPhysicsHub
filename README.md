@@ -50,4 +50,8 @@ To run the application locally:
 flask run
 ```
 
+<<<<<<< HEAD
 Navigate to http://localhost:5000 in your web browser to access StellarPhysicsHub.
+=======
+Navigate to http://localhost:5000 in your web browser to access StellarPhysicsHuqqc.
+>>>>>>> 27db15f (login)

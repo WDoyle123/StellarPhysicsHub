@@ -1,45 +1,40 @@
 from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+from flask_login import UserMixin, login_user, LoginManager, login_required, logout_user, current_user
+from flask_wtf import FlaskForm
+from wtforms import StringField, PasswordField, SubmitField
+from wtforms.validators import InputRequired, Length, ValidationError
+from flask_bcrypt import Bcrypt
 
+try:
+    with open('secretkey.txt', 'r') as file:
+        secret_key = file.read()
+
+except FileNotFoundError:
+        secret_key = 'secret_key'
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///objects.db'
+app.config['SECRET_KEY'] = secret_key
 db = SQLAlchemy(app)
+bcrypt = Bcrypt(app)
 
-constellation_asterism = db.Table('constellation_asterism',
-    db.Column('constellation_id', db.Integer, db.ForeignKey('constellation.id'), primary_key=True),
-    db.Column('asterism_id', db.Integer, db.ForeignKey('asterism.id'), primary_key=True)
-)
+from models import Constellation, Asterism, Star, User
 
-star_constellation = db.Table('star_constellation',
-    db.Column('star_id', db.Integer, db.ForeignKey('star.id'), primary_key=True),
-    db.Column('constellation_id', db.Integer, db.ForeignKey('constellation.id'), primary_key=True)
-)
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = 'login'
 
-star_asterism = db.Table('star_asterism',
-    db.Column('star_id', db.Integer, db.ForeignKey('star.id'), primary_key=True),
-    db.Column('asterism_id', db.Integer, db.ForeignKey('asterism.id'), primary_key=True)
-)
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
 
-class Constellation(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(50), nullable=False)
-    description = db.Column(db.Text, nullable=False)
-    gif_url = db.Column(db.String(255))
-    asterisms = db.relationship('Asterism', secondary=constellation_asterism, backref=db.backref('constellations', lazy='dynamic'))
-    stars = db.relationship('Star', secondary=star_constellation, backref=db.backref('constellations', lazy='dynamic'))
-
-class Asterism(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(50), nullable=False)
-    description = db.Column(db.Text, nullable=False)
-    gif_url = db.Column(db.String(255))
-    stars = db.relationship('Star', secondary=star_asterism, backref=db.backref('asterisms', lazy='dynamic'))
-
-class Star(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(50), nullable=False)
+def add_contribution_points(user_id, points=1):
+    user = User.query.get(user_id)
+    if user:
+        user.points += points
+        db.session.commit()
 
 @app.route("/")
 def index():
@@ -49,7 +44,35 @@ def index():
 
     return render_template('index.html', objects=objects)
 
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    form = LoginForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(username=form.username.data).first()
+        if user:
+            if bcrypt.check_password_hash(user.password, form.password.data):
+                login_user(user)
+                return redirect(url_for('index'))
+        else:
+            # when login fails
+            render_template('login.html',form=form)
+    return render_template('login.html', form=form)
+
+@ app.route('/register', methods=['GET', 'POST'])
+def register():
+    form = RegisterForm()
+
+    if form.validate_on_submit():
+        hashed_password = bcrypt.generate_password_hash(form.password.data)
+        new_user = User(username=form.username.data, password=hashed_password)
+        db.session.add(new_user)
+        db.session.commit()
+        return redirect(url_for('login'))
+
+    return render_template('register.html', form=form)
+
 @app.route('/contribute', methods=['GET', 'POST'])
+@login_required
 def contribute():
     if request.method == 'POST':
         # Extract data from the form
@@ -63,6 +86,7 @@ def contribute():
             existing_constellation = Constellation.query.filter_by(name=name).first()
             if existing_constellation is None:
                 new_constellation = Constellation(name=name, description=description, gif_url=gif_url)
+                # add_contribution_points(contributor_id)
                 db.session.add(new_constellation)
             else:
                 redirect(url_for('index'))
@@ -71,6 +95,7 @@ def contribute():
             existing_asterism = Asterism.query.filter_by(name=name).first()
             if existing_asterism is None:
                 new_asterism = Asterism(name=name, description=description, gif_url=gif_url)
+                # add_contribution_points(contributor_id)
                 db.session.add(new_asterism)
             else:
                 redirect(url_for('index'))

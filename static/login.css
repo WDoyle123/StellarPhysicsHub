@@ -1,0 +1,172 @@
+/* General Reset and Basic Styling */
+body, html {
+    height: 100%; /* Ensure the full height of the viewport is used */
+    font-family: Monserrat, sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: black;
+    color: #333;
+    line-height: 1.6;
+}
+
+main {
+    display: flex; /* Use Flexbox */
+    flex-direction: column; /* Stack children vertically */
+    justify-content: center; /* Center children vertically */
+    align-items: center; /* Center children horizontally */
+    height: calc(100vh - 60px); /* Full height minus header height */
+    padding: 20px;
+    margin: 0 auto;
+    max-width: 800px;
+}
+
+.welcome-section, #stars-gif {
+    width: 100%; /* Full width within the main container */
+    margin-bottom: 20px; /* Space between elements */
+    text-align: center;
+}
+
+.welcome-container {
+    background-color: #24252A; /* Same as the navigation bar */
+    border-radius: 10px; /* Rounded corners */
+    padding: 20px; /* Space around the welcome-section */
+    margin: 20px auto; /* Center the container */
+    max-width: 800px; /* Max width */
+}
+
+.welcome-section h1 {
+    color: #0077cc;
+    margin-bottom: 5px;
+    font-size: 32px;
+}
+
+.welcome-section h2 {
+    margin-bottom: 15px;
+}
+
+.welcome-section ul {
+    list-style: none;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        width: 90%;
+    }
+}
+/* General Styles */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group input,
+.form-group button {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+/* Input Field Styles */
+.form-group input[type="text"],
+.form-group input[type="password"] {
+    color: #333; /* Text color */
+    background-color: #f7f7f7; /* Background color */
+}
+
+/* Placeholder Styles */
+::placeholder {
+    color: #888;
+}
+
+/* Button Styles */
+.form-group button {
+    background-color: #4a90e2; /* Button background color */
+    color: white; /* Button text color */
+    border: none;
+    cursor: pointer;
+}
+
+.button {
+    padding: 5px 0px;
+    background-color: #0077cc;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight:Bold;
+    color: white;
+    transition: all 0.3s ease 0s;
+    width:80px;
+}
+
+.button-2 {
+	padding-top: 20px;
+    padding: 5px 0px;
+    background-color: red;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight:Bold;
+    color: white;
+    transition: all 0.3s ease 0s;
+    width:80px;
+}
+
+.button a {
+	color:white;
+	font-size:14px;
+}
+
+.button-2 a {
+	font-size:14px;
+	color:white;
+}
+
+.button:hover {
+ opacity:80%
+ }
+
+
+.button-2:hover {
+ opacity:80%
+ }
+
+
+.form-group button:hover {
+    background-color: #357abd; /* Button hover color */
+}
+
+/* Link Styles */
+a {
+    color: #4a90e2; /* Link color */
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Layout Adjustments */
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom:20px;
+}
+
+#stars-gif {
+    max-width: 100%;
+    height: auto;
+}
+

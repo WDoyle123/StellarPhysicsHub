@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='login.css') }}">
+<main>
+    <div class="welcome-container">
+        <section class="welcome-section">
+            <h1>Login</h1>
+
+<form class='form' method="POST" action="">
+    <div class='form-group'>
+        {{ form.hidden_tag() }}
+        {{ form.username.label }} {{ form.username(class='your-input-class') }}
+    </div>
+    <div class='form-group'>
+        {{ form.password.label }} {{ form.password(class='your-input-class') }}
+    </div>
+    <div class='button'>
+        {{ form.submit(class='button') }}
+    </div>
+</form>
+<div class='form'>
+		<div class='button-2'>
+			<a href='/register'>Register</a>
+		</div>
+</div>
+        </section>
+    </div>
+
+    <img src="{{ url_for('static', filename='gifs/rotating_all_stars.gif') }}" alt="Rotating All Stars" id="stars-gif">
+
+</main>
+
+{% endblock %}
+
