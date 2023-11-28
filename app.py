@@ -20,7 +20,7 @@ app.config['SECRET_KEY'] = secret_key
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 
-from models import Constellation, Asterism, Star, User
+from models import Constellation, Asterism, Star, User, LoginForm, RegisterForm
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -38,14 +38,16 @@ def add_contribution_points(user_id, points=1):
 
 @app.route("/")
 def index():
+    layout = 'layout_logged_in.html' if current_user.is_authenticated else 'layout.html'
     constellation_names = [constellation.name for constellation in Constellation.query.all()]
     asterism_names = [asterism.name for asterism in Asterism.query.all()]
     objects = asterism_names + constellation_names
 
-    return render_template('index.html', objects=objects)
+    return render_template('index.html', objects=objects, layout=layout)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    layout = 'layout_logged_in.html' if current_user.is_authenticated else 'layout.html'
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
@@ -55,8 +57,20 @@ def login():
                 return redirect(url_for('index'))
         else:
             # when login fails
-            render_template('login.html',form=form)
-    return render_template('login.html', form=form)
+            render_template('login.html',form=form, layout=layout)
+    return render_template('login.html', form=form, layout=layout)
+
+@app.route('/logout', methods=['GET', 'POST'])
+def logout():
+    logout_user()
+    return redirect(url_for('login'))
+    
+
+@app.route('/profile')
+@login_required
+def profile():
+    layout = 'layout_logged_in.html' if current_user.is_authenticated else 'layout.html'
+    return render_template('profile.html', user=current_user, layout=layout)
 
 @ app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -74,6 +88,7 @@ def register():
 @app.route('/contribute', methods=['GET', 'POST'])
 @login_required
 def contribute():
+    layout = 'layout_logged_in.html' if current_user.is_authenticated else 'layout.html'
     if request.method == 'POST':
         # Extract data from the form
         name = request.form.get('name')
@@ -86,47 +101,46 @@ def contribute():
             existing_constellation = Constellation.query.filter_by(name=name).first()
             if existing_constellation is None:
                 new_constellation = Constellation(name=name, description=description, gif_url=gif_url)
-                # add_contribution_points(contributor_id)
                 db.session.add(new_constellation)
+                db.session.commit()
+                add_contribution_points(current_user.id)  # Add points to the contributor
             else:
-                redirect(url_for('index'))
+                return redirect(url_for('index'))
 
         elif body == 'asterism':
             existing_asterism = Asterism.query.filter_by(name=name).first()
             if existing_asterism is None:
                 new_asterism = Asterism(name=name, description=description, gif_url=gif_url)
-                # add_contribution_points(contributor_id)
                 db.session.add(new_asterism)
+                db.session.commit()
+                add_contribution_points(current_user.id)  # Add points to the contributor
             else:
-                redirect(url_for('index'))
+                return redirect(url_for('index'))
 
-        db.session.commit()
         return redirect(url_for('index'))
     else:
-        constellation_names = [constellation.name for constellation in Constellation.query.all()]
-        asterism_names = [asterism.name for asterism in Asterism.query.all()]
-        objects = asterism_names + constellation_names
-
         # GET request, just render the empty form
-        return render_template('contribute.html', objects=objects)
+        return render_template('contribute.html', layout=layout)
 
 @app.route('/constellation/<name>')
 def constellation(name):
+    layout = 'layout_logged_in.html' if current_user.is_authenticated else 'layout.html'
     constellation_names = [constellation.name for constellation in Constellation.query.all()]
     asterism_names = [asterism.name for asterism in Asterism.query.all()]
     objects = asterism_names + constellation_names
 
     constellation = Constellation.query.filter_by(name=name).first_or_404()
-    return render_template('body.html', body=constellation, of_type='Constellation', objects=objects)
+    return render_template('body.html', body=constellation, of_type='Constellation', objects=objects, layout=layout)
 
 @app.route('/asterism/<name>')
 def asterism(name):
+    layout = 'layout_logged_in.html' if current_user.is_authenticated else 'layout.html'
     constellation_names = [constellation.name for constellation in Constellation.query.all()]
     asterism_names = [asterism.name for asterism in Asterism.query.all()]
     objects = asterism_names + constellation_names
 
     asterism = Asterism.query.filter_by(name=name).first_or_404()
-    return render_template('body.html', body=asterism, of_type='Asterism', objects=objects)
+    return render_template('body.html', body=asterism, of_type='Asterism', objects=objects, layout=layout)
 
 @app.route("/search")
 def search():
@@ -147,10 +161,11 @@ def search():
 
 @app.route('/wiki')
 def wiki():
+    layout = 'layout_logged_in.html' if current_user.is_authenticated else 'layout.html'
     constellation_names = [constellation.name for constellation in Constellation.query.all()]
     asterism_names = [asterism.name for asterism in Asterism.query.all()]
     objects = asterism_names + constellation_names
-    return render_template('wiki.html', constellation_names=constellation_names, asterism_names=asterism_names,objects=objects)
+    return render_template('wiki.html', constellation_names=constellation_names, asterism_names=asterism_names,objects=objects, layout=layout)
 
 with app.app_context():
     db.create_all()

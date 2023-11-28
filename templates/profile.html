@@ -1,0 +1,24 @@
+{% extends layout %}
+
+{% block body %}
+
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='login.css') }}">
+<main>
+    <div class="welcome-container">
+        <section class="welcome-section">
+		<div class='form'>
+		<h1>Welcome {{ user.username }}</h1>
+		<p>You have {{ user.points }} points. Get more points by contributing!</p>
+                <div class='button-2'>
+                        <a href='/logout'>Logout</a>
+                </div>
+		</div>
+
+        </section>
+    </div>
+
+
+</main>
+
+{% endblock %}
+
