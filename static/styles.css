@@ -16,7 +16,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 30px 10%;  /* Adjusted padding */
+    padding: 15px 60px;  /* Adjusted padding */
     background-color: #24252A;
 }
 

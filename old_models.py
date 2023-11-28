@@ -21,11 +21,27 @@ class LoginForm(FlaskForm):
     password = PasswordField(validators=[InputRequired(), Length(min=8, max=20)], render_kw={"placeholder": "Password"})
     submit = SubmitField('Login')
 
+constellation_asterism = db.Table('constellation_asterism',
+    db.Column('constellation_id', db.Integer, db.ForeignKey('constellation.id'), primary_key=True),
+    db.Column('asterism_id', db.Integer, db.ForeignKey('asterism.id'), primary_key=True)
+)
+
+star_constellation = db.Table('star_constellation',
+    db.Column('star_id', db.Integer, db.ForeignKey('star.id'), primary_key=True),
+    db.Column('constellation_id', db.Integer, db.ForeignKey('constellation.id'), primary_key=True)
+)
+
+star_asterism = db.Table('star_asterism',
+    db.Column('star_id', db.Integer, db.ForeignKey('star.id'), primary_key=True),
+    db.Column('asterism_id', db.Integer, db.ForeignKey('asterism.id'), primary_key=True)
+)
+
 class Constellation(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), nullable=False)
     description = db.Column(db.Text, nullable=True)
-    stars = db.Column(db.Text, nullable=False)
+    asterisms = db.relationship('Asterism', secondary=constellation_asterism, backref=db.backref('constellations', lazy='dynamic'))
+    stars = db.relationship('Star', secondary=star_constellation, backref=db.backref('constellations', lazy='dynamic'))
     contributor_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     contributor = db.relationship('User')
 
@@ -33,7 +49,7 @@ class Asterism(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), nullable=False)
     description = db.Column(db.Text, nullable=True)
-    stars = db.Column(db.Text, nullable=False)
+    stars = db.relationship('Star', secondary=star_asterism, backref=db.backref('asterisms', lazy='dynamic'))
     contributor_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     contributor = db.relationship('User')
 

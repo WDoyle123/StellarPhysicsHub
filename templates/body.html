@@ -8,11 +8,13 @@
         <section class="welcome-section">
 		<h1>{{ body.name }}</h1>
 		<h2>{{ of_type }}</h2>
-		<p>{{ body.description }}</p>
+		<p>The {{ body.name }} {{ of_type }} contains the follwing notable stars: {{ body.stars | replace(",",", ") }}</p>
+
         </section>
     </div>
 
-    <img src='{{ body.gif_url }}' alt="Rotating {{ body.name }} gif" id="stars-gif">
+<img src='https://raw.githubusercontent.com/WDoyle123/StarScholar3D/main/animations/rotating_{{ body.name | lower | replace(" ", "_") }}.gif' alt='Rotating {{ body.name | lower | replace(" ", "_") }} GIF not generated' id='stars-gif'>
+
 
 </main>
 

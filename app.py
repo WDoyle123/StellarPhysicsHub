@@ -95,12 +95,11 @@ def contribute():
         body = request.form.get('body')
         description = request.form.get('description')
         stars_in_body = request.form.get('stars_in_body')
-        gif_url = request.form.get('gif_url')
 
         if body == 'constellation':
             existing_constellation = Constellation.query.filter_by(name=name).first()
             if existing_constellation is None:
-                new_constellation = Constellation(name=name, description=description, gif_url=gif_url)
+                new_constellation = Constellation(name=name, description=description, stars=stars_in_body)
                 db.session.add(new_constellation)
                 db.session.commit()
                 add_contribution_points(current_user.id)  # Add points to the contributor
@@ -110,7 +109,7 @@ def contribute():
         elif body == 'asterism':
             existing_asterism = Asterism.query.filter_by(name=name).first()
             if existing_asterism is None:
-                new_asterism = Asterism(name=name, description=description, gif_url=gif_url)
+                new_asterism = Asterism(name=name, description=description, stars=stars_in_body)
                 db.session.add(new_asterism)
                 db.session.commit()
                 add_contribution_points(current_user.id)  # Add points to the contributor
