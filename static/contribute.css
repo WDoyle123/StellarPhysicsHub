@@ -115,9 +115,13 @@ main {
 }
 
 /* Responsive Design */
-@media (max-width: 768px) {
+@media (max-width: 800px) {
     .container {
         width: 90%;
+    }
+
+    main {
+	    margin-top:200px;
     }
 }
 

@@ -2,6 +2,7 @@
 
 body, html {
     height: 100%; /* Ensure the full height of the viewport is used */
+
 }
 
 * {
@@ -26,6 +27,7 @@ main {
     padding: 20px;
     margin: 0 auto;
     max-width: 800px;
+    margin-top: 100px;
 }
 
 .welcome-section, #stars-gif {
