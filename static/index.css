@@ -96,3 +96,6 @@ main {
  opacity:80%
  }
 
+.welcome-section p {
+	padding-bottom:10px;
+}
