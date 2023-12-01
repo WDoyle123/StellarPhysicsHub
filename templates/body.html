@@ -6,16 +6,47 @@
 <main>
     <div class="welcome-container">
         <section class="welcome-section">
-		<h1>{{ body.name }}</h1>
-		<h2>{{ of_type }}</h2>
-		<p>The {{ body.name }} {{ of_type }} contains the follwing notable stars: {{ body.stars | replace(",",", ") }}</p>
+            <h1>{{ body.name }}</h1>
+            <h2>{{ of_type }}</h2>
+            <p>The {{ body.name }} {{ of_type }} contains the following notable stars: {{ star_names }} </p>
 
-        </section>
+        </section>{% if has_notes %}
+    <h3>Notes on Notable Stars:</h3>
+    <ul>
+        {% for star in stars %}
+            {% if star.notes %}
+                <li>{{ star.name }}: {{ star.notes }}</li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+{% endif %}
+
     </div>
 
     <img src='https://raw.githubusercontent.com/WDoyle123/StarScholar3D/main/animations/{{ of_type | lower }}s/rotating_{{ body.name | lower | replace(" ", "_") }}.gif' alt='Rotating {{ body.name | lower | replace(" ", "_") }} GIF not generated' id='stars-gif'>
 
-
+    <section class="star-details-section">
+        <h3>Detailed Star Information:</h3>
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Right Ascension</th>
+                <th>Declination</th>
+                <th>Distance (parsecs)</th>
+                <th>Notes</th>
+                <th>Source</th>
+            </tr>
+            {% for star in stars %}
+                <tr>
+                    <td>{{ star.name or star.alt}}</td>
+                    <td>{{ star.right_ascension }}</td>
+                    <td>{{ star.declination }}</td>
+                    <td>{{ star.distance }}</td>
+                    <td>{{ star.source or 'N/A' }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </section>
 </main>
 
 {% endblock %}

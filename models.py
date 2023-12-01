@@ -25,21 +25,21 @@ class Constellation(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), nullable=False)
     description = db.Column(db.Text, nullable=True)
-    stars = db.Column(db.Text, nullable=False)
+    stars = db.relationship('Star', backref='constellation', lazy=True)
     contributor_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    contributor = db.relationship('User')
-
-class Asterism(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(50), nullable=False)
-    description = db.Column(db.Text, nullable=True)
-    stars = db.Column(db.Text, nullable=False)
-    contributor_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    contributor = db.relationship('User')
+    contributor = db.relationship('User', backref='constellations', lazy=True)
 
 class Star(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(50), nullable=False)
+    alt_name = db.Column(db.String(50), nullable=False)
+    common_name = db.Column(db.String(50), nullable=True)
+    right_acension = db.Column(db.Float(), nullable=False)
+    declination = db.Column(db.Float(), nullable=False)
+    bv_colour = db.Column(db.Float(), nullable=False)
+    parsecs = db.Column(db.Float(), nullable=False)
+    note = db.Column(db.Text(), nullable=True)
+    source = db.Column(db.Text(), nullable=True)
+    constellation_id = db.Column(db.Integer, db.ForeignKey('constellation.id'))
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, nullable=False, primary_key=True)
