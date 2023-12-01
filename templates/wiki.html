@@ -2,12 +2,12 @@
 
 {% block body %}
 
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='contribute.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='wiki.css') }}">
 <main>
     <div class="welcome-container">
         <section class="welcome-section">
             <h1>Constellations</h1>
-            <ul>
+            <ul class='three_column'>
                 {% for name in constellation_names %}
                 <li><a href="{{ url_for('constellation', name=name) }}">{{ name }}</a></li>
                 {% endfor %}

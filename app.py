@@ -146,7 +146,7 @@ def constellation(name):
     ]
 
     star_names = [star.common_name for star in stars if star.common_name is not None and pd.notna(star.common_name)]
-
+    star_names.sort()
     has_notes = any(star.get('notes') for star in star_details)
     return render_template('body.html', body=constellation, stars=star_details, star_names=star_names, has_notes=has_notes, of_type='Constellation', objects=objects, layout=layout)
 
@@ -181,6 +181,7 @@ def search():
 def wiki():
     layout = 'layout_logged_in.html' if current_user.is_authenticated else 'layout.html'
     constellation_names = [constellation.name for constellation in Constellation.query.all()]
+    constellation_names.sort()
     asterism_names = []#asterism.name for asterism in Asterism.query.all()]
     objects = asterism_names + constellation_names
     return render_template('wiki.html', constellation_names=constellation_names, asterism_names=asterism_names,objects=objects, layout=layout)
