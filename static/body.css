@@ -142,6 +142,24 @@ td {
 
     table {
         font-size: 14px;
+        display: block;
+        overflow-x: auto;  /* Allows table to be scrollable horizontally */
+        white-space: nowrap;  /* Prevents wrapping of table contents */
+    }
+
+    table, th, td {
+        padding: 5px;  /* Reduces padding on smaller screens */
+    }
+}
+
+/* Responsive adjustments for very small screens */
+@media screen and (max-width: 480px) {
+    h1, h2, h3 {
+        font-size: 20px;  /* Reduces font sizes for headers */
+    }
+
+    .welcome-section p, .notes-section li {
+        font-size: 12px;  /* Further reduces font sizes for text */
     }
 }
 
