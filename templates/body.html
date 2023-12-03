@@ -21,26 +21,38 @@
         {% endfor %}
     </ul>
 {% endif %}
+	<h3>How to Use:</h3>
+	<ul>
+		<li> Left Click: Orbital Rotation</li>
+		<li> Right Click: Pan </li>
+		<li> Scroll Wheel: Zoom</li>
+	</ul>
 	</div>
     </div>
-
-    <img src='https://raw.githubusercontent.com/WDoyle123/StarScholar3D/main/animations/{{ of_type | lower }}s/rotating_{{ body.name | lower | replace(" ", "_") }}.gif' alt='Rotating {{ body.name | lower | replace(" ", "_") }} GIF not generated' id='stars-gif'>
+    <div class=frame>
+<iframe src="{{ url_for('static', filename='htmls/' ~ body.name | lower | replace(' ', '_') ~ '_plot.html') }}" 
+        width="90%" height="800" frameborder="1"></iframe>
+    </div>
 
     <section class="star-details-section">
         <h3>Detailed Star Information:</h3>
         <table>
             <tr>
                 <th>Name</th>
+		<th> Harvard Revisied Name</th>
                 <th>Right Ascension</th>
                 <th>Declination</th>
                 <th>Distance (parsecs)</th>
+		<th>Vmag (log) </th>
             </tr>
             {% for star in stars %}
                 <tr>
                     <td>{{ star.name or star.alt}}</td>
+		    <td>{{ star.hr_name }}</td>
                     <td>{{ star.right_ascension }}</td>
                     <td>{{ star.declination }}</td>
                     <td>{{ star.distance }}</td>
+		    <td>{{ star.vmag }}</td>
                 </tr>
             {% endfor %}
         </table>

@@ -47,10 +47,12 @@ with app.app_context():
         # Create a new Star object
         star = Star(
             alt_name=row['alt_name'],
+            hr_name=row['hr'],
             common_name=row['iau_name'],
-            right_acension=row['ra'],
-            declination=row['dec'],  
+            right_acension=row['ra_simbad'],
+            declination=row['dec_simbad'],  
             bv_colour=row['bv_color'],
+            vmag=row['vmag'],
             parsecs=row['distance'],  
             note=row['note'],
             source=row['source'],

@@ -135,12 +135,14 @@ def constellation(name):
     star_details = [
         {
             'name': star.common_name,
+            'hr_name': star.hr_name,
             'alt' : star.alt_name,
             'notes': star.note,
             'source': star.source,
             'distance': round(star.parsecs, 2),
             'right_ascension': round(star.right_acension, 2),
-            'declination': round(star.declination, 2)
+            'declination': round(star.declination, 2),
+            'vmag': star.vmag
         }
         for star in stars
     ]

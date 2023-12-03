@@ -32,10 +32,12 @@ class Constellation(db.Model):
 class Star(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     alt_name = db.Column(db.String(50), nullable=False)
+    hr_name = db.Column(db.String(50), nullable=False)
     common_name = db.Column(db.String(50), nullable=True)
     right_acension = db.Column(db.Float(), nullable=False)
     declination = db.Column(db.Float(), nullable=False)
     bv_colour = db.Column(db.Float(), nullable=False)
+    vmag = db.Column(db.Float(), nullable=True)
     parsecs = db.Column(db.Float(), nullable=False)
     note = db.Column(db.Text(), nullable=True)
     source = db.Column(db.Text(), nullable=True)

@@ -21,6 +21,15 @@ li {
     margin-bottom: 20px;
 }
 
+.frame {
+    display: flex;         /* Use flexbox layout */
+    justify-content: center; /* Center horizontally in the flex container */
+    align-items: center;     /* Center vertically in the flex container */
+    height: 100%;            /* Set the height of the container */
+    margin: auto; 
+    margin-bottom:20px;/* Add automatic margins */
+}
+
 .welcome-section h1, .welcome-section h2 {
     color: #0077cc;
     margin-bottom: 10px;
@@ -36,6 +45,7 @@ h2 {
 
 h3 {
 	font-size:24px;
+	margin-top: 10px;
 	color:#0077cc;
 }
 
