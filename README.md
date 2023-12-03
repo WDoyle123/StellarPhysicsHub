@@ -4,6 +4,10 @@
 
 [StellarPhysicsHub Live Demo](http://wdoyle123.pythonanywhere.com/)
 
+![demo](demo/demo.gif)
+
+**Note low fps due to being a gif, not the web app**
+
 ## Description
 
 StellarPhysicsHub is a Flask-based web application designed for astronomy enthusiasts and researchers. It leverages Flask, a lightweight WSGI web application framework, to provide a user-friendly interface and SQLAlchemy for database interactions. The app offers detailed information about various constellations and asterisms, allowing users to search, view, and interact with celestial bodies.
