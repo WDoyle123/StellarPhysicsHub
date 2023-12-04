@@ -24,7 +24,7 @@ save_path = "all_constellations_and_their_stars.csv"
 download_csv(csv_url, save_path)
 
 from app import app
-from models import Constellation, Star, db
+from models import Asterism, Constellation, Star, db
 
 df = pd.read_csv(save_path)
 
@@ -32,7 +32,11 @@ df = pd.read_csv(save_path)
 with app.app_context():  
     # Extract unique constellations
     unique_constellations = df['constellation_common_name'].unique()
+    unique_constellations = [constellation for constellation in unique_constellations if pd.notna(constellation)]
 
+    unique_asterisms = df['asterism'].unique()
+    unique_asterisms = [asterism for asterism in unique_asterisms if pd.notna(asterism)]
+    
     for constellation_name in unique_constellations:
         constellation = Constellation.query.filter_by(name=constellation_name).first()
         if not constellation:
@@ -40,9 +44,17 @@ with app.app_context():
             db.session.add(constellation)
     db.session.commit()
 
+    for asterism_name in unique_asterisms:
+        asterism = Asterism.query.filter_by(name=asterism_name).first()
+        if not asterism:
+            asterism = Asterism(name=asterism_name)
+            db.session.add(asterism)
+    db.session.commit()
+
     for _, row in df.iterrows():
         # Find the corresponding constellation
         constellation = Constellation.query.filter_by(name=row['constellation_common_name']).first()
+        asterism = Asterism.query.filter_by(name=row['asterism']).first()
         
         # Create a new Star object
         star = Star(
@@ -56,7 +68,8 @@ with app.app_context():
             parsecs=row['distance'],  
             note=row['note'],
             source=row['source'],
-            constellation_id=constellation.id if constellation else None
+            constellation_id=constellation.id if constellation else None,
+            asterism_id=asterism.id if asterism else None
         )
 
         db.session.add(star)

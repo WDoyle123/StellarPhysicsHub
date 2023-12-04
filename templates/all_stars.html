@@ -1,0 +1,47 @@
+{% extends layout %}
+
+{% block body %}
+
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='body.css') }}">
+<main>
+    <div class="welcome-container">
+        <section class="welcome-section">
+            <h1>All Stars</h1>
+            <h2>Yale Bright Star Catalogue</h2>
+            <p>The 9110 stars used in our database come from a collection of databases, primarily we use the Yale Bright Star Catalogue. Aswell as this, we use SIMBAD and IAU for various parts of the calculations used to plot the stars. The Yale Bright Star Catalogue contains roughly every star visible to the naked eye on Earth</p>
+
+	<h3>How to Use:</h3>
+	<ul>
+		<li> Left Click: Orbital Rotation</li>
+		<li> Right Click: Pan </li>
+		<li> Scroll Wheel: Zoom</li>
+
+	</ul>
+	</div>
+    </div>
+    <div class=frame>
+
+<iframe id='myIframe' src="{{ url_for('static', filename='htmls/all_stars_plot.html') }}" 
+        width="90%" height="800" frameborder="1"></iframe>
+		<button onclick="toggleFullScreen('myIframe')">Toggle Full Screen</button>
+    </div>
+
+
+<script>
+function toggleFullScreen(iframeId) {
+    var iframe = document.getElementById(iframeId);
+    if (iframe.requestFullscreen) {
+        iframe.requestFullscreen();
+    } else if (iframe.mozRequestFullScreen) { /* Firefox */
+        iframe.mozRequestFullScreen();
+    } else if (iframe.webkitRequestFullscreen) { /* Chrome, Safari & Opera */
+        iframe.webkitRequestFullscreen();
+    } else if (iframe.msRequestFullscreen) { /* IE/Edge */
+        iframe.msRequestFullscreen();
+    }
+}
+</script>
+
+
+{% endblock %}
+

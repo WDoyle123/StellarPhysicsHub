@@ -21,7 +21,7 @@ app.config['SECRET_KEY'] = secret_key
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 
-from models import Constellation, Star, User, LoginForm, RegisterForm
+from models import Asterism, Constellation, Star, User, LoginForm, RegisterForm
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -41,10 +41,18 @@ def add_contribution_points(user_id, points=1):
 def index():
     layout = 'layout_logged_in.html' if current_user.is_authenticated else 'layout.html'
     constellation_names = [constellation.name for constellation in Constellation.query.all()]
-    asterism_names = []#asterism.name for asterism in Asterism.query.all()]
+    asterism_names = [asterism.name for asterism in Asterism.query.all()]
     objects = asterism_names + constellation_names
 
     return render_template('index.html', objects=objects, layout=layout)
+@app.route('/all_stars')
+def all_stars():
+    layout = 'layout_logged_in.html' if current_user.is_authenticated else 'layout.html'
+    constellation_names = [constellation.name for constellation in Constellation.query.all()]
+    asterism_names = [asterism.name for asterism in Asterism.query.all()]
+    objects = asterism_names + constellation_names
+
+    return render_template('all_stars.html', objects=objects, layout=layout)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -126,7 +134,7 @@ def contribute():
 def constellation(name):
     layout = 'layout_logged_in.html' if current_user.is_authenticated else 'layout.html'
     constellation_names = [constellation.name for constellation in Constellation.query.all()]
-    asterism_names = []#asterism.name for asterism in Asterism.query.all()]
+    asterism_names = [asterism.name for asterism in Asterism.query.all()]
     objects = asterism_names + constellation_names
 
     constellation = Constellation.query.filter_by(name=name).first_or_404()
@@ -160,7 +168,27 @@ def asterism(name):
     objects = asterism_names + constellation_names
 
     asterism = Asterism.query.filter_by(name=name).first_or_404()
-    return render_template('body.html', body=asterism, of_type='Asterism', objects=objects, layout=layout)
+    stars = Star.query.filter_by(asterism_id=asterism.id)
+
+    star_details = [
+            {
+                'name': star.common_name,
+                'hr_name': star.hr_name,
+                'alt': star.alt_name,
+                'notes': star.note,
+                'source': star.source,
+                'distance': round(star.parsecs, 2),
+                'right_ascension': round(star.right_acension, 2),
+                'declination': round(star.declination, 2),
+                'vmag': star.vmag
+                }
+            for star in stars
+        ]
+    star_names = [star.common_name for star in stars if star.common_name is not None and pd.notna(star.common_name)]
+    star_names.sort()
+    has_notes = any(star.get('notes') for star in star_details)
+
+    return render_template('body.html', body=asterism, stars=star_details, star_names=star_names, has_notes=has_notes, of_type='Asterism', objects=objects, layout=layout)
 
 @app.route("/search")
 def search():
@@ -184,7 +212,8 @@ def wiki():
     layout = 'layout_logged_in.html' if current_user.is_authenticated else 'layout.html'
     constellation_names = [constellation.name for constellation in Constellation.query.all()]
     constellation_names.sort()
-    asterism_names = []#asterism.name for asterism in Asterism.query.all()]
+    asterism_names = [asterism.name for asterism in Asterism.query.all()]
+    asterism_names.sort()
     objects = asterism_names + constellation_names
     return render_template('wiki.html', constellation_names=constellation_names, asterism_names=asterism_names,objects=objects, layout=layout)
 

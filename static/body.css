@@ -23,11 +23,16 @@ li {
 
 .frame {
     display: flex;         /* Use flexbox layout */
+    flex-direction: column;
     justify-content: center; /* Center horizontally in the flex container */
     align-items: center;     /* Center vertically in the flex container */
     height: 100%;            /* Set the height of the container */
     margin: auto; 
     margin-bottom:20px;/* Add automatic margins */
+}
+
+iframe {
+	margin-bottom:20px;
 }
 
 .welcome-section h1, .welcome-section h2 {

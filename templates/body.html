@@ -26,7 +26,6 @@
 		<li> Left Click: Orbital Rotation</li>
 		<li> Right Click: Pan </li>
 		<li> Scroll Wheel: Zoom</li>
-		<button onclick="toggleFullScreen('myIframe')">Toggle Full Screen</button>
 
 	</ul>
 	</div>
@@ -35,6 +34,7 @@
 
 <iframe id='myIframe' src="{{ url_for('static', filename='htmls/' ~ body.name | lower | replace(' ', '_') ~ '_plot.html') }}" 
         width="90%" height="800" frameborder="1"></iframe>
+		<button onclick="toggleFullScreen('myIframe')">Toggle Full Screen</button>
     </div>
 
     <section class="star-details-section">

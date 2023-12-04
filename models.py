@@ -29,9 +29,17 @@ class Constellation(db.Model):
     contributor_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     contributor = db.relationship('User', backref='constellations', lazy=True)
 
+class Asterism(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(50), nullable=False)
+    description = db.Column(db.Text, nullable=True)
+    stars = db.relationship('Star', backref='asterism', lazy=True)
+    contributor_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    contributor = db.relationship('User', backref='asterisms', lazy=True)
+
 class Star(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    alt_name = db.Column(db.String(50), nullable=False)
+    alt_name = db.Column(db.String(50), nullable=True)
     hr_name = db.Column(db.String(50), nullable=False)
     common_name = db.Column(db.String(50), nullable=True)
     right_acension = db.Column(db.Float(), nullable=False)
@@ -42,6 +50,7 @@ class Star(db.Model):
     note = db.Column(db.Text(), nullable=True)
     source = db.Column(db.Text(), nullable=True)
     constellation_id = db.Column(db.Integer, db.ForeignKey('constellation.id'))
+    asterism_id = db.Column(db.Integer, db.ForeignKey('asterism.id'))
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, nullable=False, primary_key=True)

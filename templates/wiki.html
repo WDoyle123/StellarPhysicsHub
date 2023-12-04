@@ -6,19 +6,23 @@
 <main>
     <div class="welcome-container">
         <section class="welcome-section">
+            <a href="{{ url_for('all_stars') }}"><h1>All Stars</h1></a>
+        </section>
+
+        <section class="welcome-section">
             <h1>Constellations</h1>
-            <ul class='three_column'>
+            <ul class="three_column">
                 {% for name in constellation_names %}
-                <li><a href="{{ url_for('constellation', name=name) }}">{{ name }}</a></li>
+                    <li><a href="{{ url_for('constellation', name=name) }}">{{ name }}</a></li>
                 {% endfor %}
             </ul>
         </section>
 
-        <section class='welcome-section'>
+        <section class="welcome-section">
             <h1>Asterisms</h1>
-            <ul class=nav-links>
+            <ul class="three_column">
                 {% for name in asterism_names %}
-                <li><a href="{{ url_for('asterism', name=name) }}">{{ name }}</a></li>
+                    <li><a href="{{ url_for('asterism', name=name) }}">{{ name.replace('_', ' ') | title }}</a></li>
                 {% endfor %}
             </ul>
         </section>
