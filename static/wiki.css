@@ -9,6 +9,8 @@ main {
     margin: 20px;
     color:black;
     background-color:black;
+    justify-content:center;
+    display:flex;
 }
 
 .welcome-container {
@@ -16,6 +18,7 @@ main {
     padding: 20px;
     border-radius: 8px;
     margin-bottom: 20px;
+    width: 800px;
 }
 
 .welcome-section h1, .welcome-section h2 {
@@ -132,6 +135,10 @@ td {
 
     table {
         font-size: 14px;
+    }
+
+    .three_column {
+	display:block;
     }
 }
 

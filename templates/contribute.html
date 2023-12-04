@@ -11,7 +11,8 @@
             <p>Help us expand our database by contributing information about constellations and asterisms. Please adhere to the following guidelines:</p>
             <ul>
                 <li>Ensure that the name of the constellation or asterism is accurate and spelled correctly.</li>
-                <li>List the stars in the constellation or asterism, separated by commas.</li>
+                <li>Make sure to cite sources used. For example: The Big Dipper is an asterism [1]</li>
+		<li>Make a sources section at the end of the description. example: [1] www.source/thissource.com</li>
             </ul>
             
             <form class=form action="{{ url_for('contribute') }}" method="post">
@@ -28,11 +29,13 @@
                     <label for="name">Name:</label>
                     <input type="text" id="name" name="name" placeholder="Big Dipper" required>
                 </div>
-                <div class="form-group">
-                    <label for="stars_in_body">Stars (comma-separated):</label>
-                    <input type="text" id="stars_in_body" placeholder="Mizar,Magrez,Dubhe..." name="stars_in_body">
-                </div>
-		                <button type="submit">Submit</button>
+
+	  	<div class="form-group">
+		        <label for="description">Description:</label>
+		        <textarea id="description" name="description" placeholder="Enter a description..." class="description-box" required></textarea>
+		    </div>
+
+               <button type="submit">Submit</button>
             </form>
         </section>
     </div>

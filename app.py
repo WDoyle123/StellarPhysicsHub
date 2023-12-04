@@ -94,6 +94,7 @@ def register():
 
     return render_template('register.html', form=form)
 
+# wip might not include
 @app.route('/contribute', methods=['GET', 'POST'])
 @login_required
 def contribute():
@@ -101,29 +102,28 @@ def contribute():
     if request.method == 'POST':
         # Extract data from the form
         name = request.form.get('name')
-        body = request.form.get('body')
         description = request.form.get('description')
-        stars_in_body = request.form.get('stars_in_body')
+        body = request.form.get('body')
 
         if body == 'constellation':
             existing_constellation = Constellation.query.filter_by(name=name).first()
-            if existing_constellation is None:
-                new_constellation = Constellation(name=name, description=description, stars=stars_in_body)
-                db.session.add(new_constellation)
+            if existing_constellation:
+                existing_constellation.description = description
                 db.session.commit()
                 add_contribution_points(current_user.id)  # Add points to the contributor
+                return redirect(url_for('constellation', name=name))
             else:
-                return redirect(url_for('index'))
+                return redirect(url_for('index'))  # Redirect if the constellation does not exist
 
         elif body == 'asterism':
             existing_asterism = Asterism.query.filter_by(name=name).first()
-            if existing_asterism is None:
-                new_asterism = Asterism(name=name, description=description, stars=stars_in_body)
-                db.session.add(new_asterism)
+            if existing_asterism:
+                existing_asterism.description = description
                 db.session.commit()
                 add_contribution_points(current_user.id)  # Add points to the contributor
+                return redirect(url_for('asterism', name=name))
             else:
-                return redirect(url_for('index'))
+                return redirect(url_for('index'))  # Redirect if the asterism does not exist
 
         return redirect(url_for('index'))
     else:

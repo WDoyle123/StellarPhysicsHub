@@ -1,7 +1,7 @@
 body, html {
     height: 100%;
     margin: 0;
-    font-family: Monserrat, sans-serif;
+    font-family: 'Montserrat', sans-serif;
 }
 
 * {
@@ -16,16 +16,20 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 60px;  /* Adjusted padding */
+    padding: clamp(10px, 2vw, 15px) clamp(30px, 6vw, 60px); /* Responsive padding */
     background-color: #24252A;
+    position: sticky;
+    top:0;
+    z-index: 1000;
 }
 
 .logo {
-    font-size: 24px;
+    font-size: clamp(15px, 2vw, 24px); /* Responsive font size */
     font-weight: bold;
     text-decoration: none;
     color: #edf0f1;
     transition: all 0.3s ease 0s;
+    margin-right: clamp(10px, 2vw, 20px); /* Responsive margin to the right */
 }
 
 .logo:hover {
@@ -35,18 +39,15 @@ header {
 .nav_links {
     list-style: none;
     display: flex;
+    gap: clamp(10px, 2vw, 20px); /* Creates even spacing between navigation items */
 }
-
-.nav_links li {
-}
-
 
 .nav_links li a {
-    padding-right: 20px;
     font-weight: bold;
     transition: all 0.3s ease 0s;
     text-decoration: none;
     color: #edf0f1;
+    font-size: clamp(14px, 2vw, 18px);
 }
 
 .nav_links li a:hover {
@@ -54,8 +55,8 @@ header {
 }
 
 button {
-    padding: 8px 16px;
-    margin-left: 8px;
+    padding: clamp(4px, 1vw, 8px) clamp(8px, 2vw, 16px); /* Responsive padding */
+    margin-left: clamp(4px, 1vw, 8px); /* Responsive margin */
     background-color: #0077cc;
     border: none;
     border-radius: 4px;
@@ -73,47 +74,67 @@ form {
     flex-grow: 1;
     display: flex;
     justify-content: center;
-    padding: 0 20px;
-    max-width: 800px; /* Set the maximum width for the search bar */
+    padding-right: clamp(20px, 1vw, 40px); /* Responsive padding */
+    max-width: clamp(400px, 80vw, 800px); /* Responsive max-width */
     margin: 0 auto; /* Centers the search bar */
 }
 
 input[type="search"] {
     flex-grow: 1;
-    padding: 8px;
+    padding: clamp(4px, 1vw, 8px); /* Responsive padding */
     border: 1px solid #ddd;
     border-radius: 4px;
     background-color: white;
     color: black;
+    font-size: clamp(12px, 1.5vw, 16px); /* Responsive font size */
+    height: clamp(30px, 4vw, 40px); /* Responsive height */
 }
 
-/* Responsive Adjustments */
-@media screen and (max-width: 1024px) {
+/* Additional Media Query for Screens below 566px */
+@media screen and (max-width: 566px) {
     header {
-        flex-direction: column;
-        padding: 20px;
+        display: block;
+        padding: 10px; /* Reduced padding */
     }
 
     .logo {
-        margin-bottom: 20px; /* Add space between logo and navigation */
+        font-size: 15px; /* Smaller font size */
+        margin-bottom: 10px; /* Spacing between logo and navigation */
+        text-align: center; /* Center the logo */
+	margin-left: 40px;
     }
 
     .nav_links {
-        align-items: center;
+        display: flex;
+        justify-content: center; /* Center the navigation links */
+        gap: 10px; /* Reduced gap */
+        width: 100%; /* Full width for better alignment */
     }
 
     .nav_links li {
-        padding: 10px 5px; /* Adjust padding for mobile */
+        text-align: center; /* Center each navigation item */
+    }
+
+    .nav_links li a {
+        font-size: 14px; /* Smaller font size */
+        padding: 5px; /* Reduced padding */
     }
 
     form {
-        flex-direction: column;
-        max-width: 100%;
+        display: flex;
+        flex-direction: column; /* Stack form elements */
+        align-items: center; /* Center form elements */
+        padding-right: 0; /* Remove padding */
+        width: 100%; /* Full width */
+        margin: 10px 0; /* Spacing above and below the form */
     }
 
     input[type="search"], button {
-        width: 100%;
-        margin: 5px 0; /* Add spacing between elements */
+        width: 80%; /* Adjust width as needed */
+        margin-bottom: 10px; /* Spacing between elements */
+    }
+
+    button {
+        padding: 5px 10px; /* Reduced padding */
     }
 }
-

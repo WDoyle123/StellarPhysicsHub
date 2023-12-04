@@ -41,6 +41,14 @@ main {
     max-width: 800px; /* Max width */
 }
 
+.form-group textarea.description-box {
+    height: 150px; /* Specific height for description box */
+    resize: vertical; /* Allow vertical resizing, none for no resizing */
+}
+
+/* Add additional CSS if needed for other elements */
+
+
 .welcome-section h1 {
     color: #0077cc;
     margin-bottom: 5px;
