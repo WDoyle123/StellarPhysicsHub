@@ -4,7 +4,7 @@
 
 [StellarPhysicsHub Live Demo](http://wdoyle123.pythonanywhere.com/)
 
-![demo](demo/demo.gif)
+![demo](demo/demo2.gif)
 
 **Note low fps due to being a gif, not the web app**
 

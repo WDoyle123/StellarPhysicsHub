@@ -36,6 +36,10 @@ header {
     color: #0077cc;
 }
 
+nav {
+	margin-left: clamp(20px, 5vw, 79px);
+}
+
 .nav_links {
     list-style: none;
     display: flex;
