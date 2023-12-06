@@ -1,5 +1,6 @@
 body, html {
     height: 100%;
+    min-height: 100vh;
     margin: 0;
     font-family: 'Montserrat', sans-serif;
 }
@@ -102,39 +103,58 @@ input[type="search"] {
     }
 
     .logo {
+	    margin:0;
+	    display:flex;
+	    justify-content:center;
+	    align-items:center;
+	    flex-direction:column;
         font-size: 15px; /* Smaller font size */
         margin-bottom: 10px; /* Spacing between logo and navigation */
         text-align: center; /* Center the logo */
-	margin-left: 40px;
     }
 
     .nav_links {
         display: flex;
+	align-items:center;
         justify-content: center; /* Center the navigation links */
         gap: 10px; /* Reduced gap */
         width: 100%; /* Full width for better alignment */
+	text-align:center;
     }
 
     .nav_links li {
-        text-align: center; /* Center each navigation item */
+	    margin:0;
+	    padding: 0;
     }
 
     .nav_links li a {
+	    margin:0;
+	    padding:0;
         font-size: 14px; /* Smaller font size */
-        padding: 5px; /* Reduced padding */
     }
 
+    nav {
+		margin:0;
+		padding:0;
+	}
+
     form {
+	    margin:0;
+	    padding:0;
         display: flex;
         flex-direction: column; /* Stack form elements */
         align-items: center; /* Center form elements */
         padding-right: 0; /* Remove padding */
         width: 100%; /* Full width */
         margin: 10px 0; /* Spacing above and below the form */
+	max-width: none;
     }
 
     input[type="search"], button {
-        width: 80%; /* Adjust width as needed */
+	    flex-grow:0;
+	    max-width: 220px;
+	    margin:0;
+        width: 220px; /* Adjust width as needed */
         margin-bottom: 10px; /* Spacing between elements */
     }
 
@@ -144,8 +164,8 @@ input[type="search"] {
 }
 
 
-.footer {
-  position: ;
+footer {
+  position: static;
   left: 0;
   bottom: 0;
   width: 100%;
@@ -155,11 +175,11 @@ input[type="search"] {
   padding: 20px 0;
 }
 
-.footer p {
+footer p {
 	margin-top: 20px;
 }
 
-.footer a {
+footer a {
 	color: #4a90e2;
 	text-decoration: none;
 }

@@ -107,7 +107,6 @@ main {
     font-weight:Bold;
     color: white;
     transition: all 0.3s ease 0s;
-    width:80px;
 }
 
 .button-2 {
@@ -121,7 +120,6 @@ main {
     font-weight:Bold;
     color: white;
     transition: all 0.3s ease 0s;
-    width:80px;
 }
 
 .button a {
@@ -129,10 +127,6 @@ main {
 	font-size:14px;
 }
 
-.button-2 {
-
-	margin-left: -20px;
-}
 
 .button-2 a {
 	font-size:14px;
@@ -163,13 +157,20 @@ a:hover {
     text-decoration: underline;
 }
 
-/* Layout Adjustments */
 .form {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom:20px;
+    justify-content: center; /* Centers items horizontally */
+    align-items: center; /* Centers items vertically (if needed) */
+    flex-direction: column; /* Stacks children vertically */
+    margin-bottom: 20px;
 }
+
+.button, .button-2 {
+    display: flex;
+    justify-content: center;
+    width: 80px; /* Take full width of the parent .form */
+}
+
 
 #stars-gif {
     max-width: 100%;
