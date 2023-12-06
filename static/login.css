@@ -111,6 +111,7 @@ main {
 }
 
 .button-2 {
+	margin-top: 20px;
 	padding-top: 20px;
     padding: 5px 0px;
     background-color: red;
@@ -126,6 +127,11 @@ main {
 .button a {
 	color:white;
 	font-size:14px;
+}
+
+.button-2 {
+
+	margin-left: -20px;
 }
 
 .button-2 a {
@@ -170,7 +176,3 @@ a:hover {
     height: auto;
 }
 
-p {
-	margin-top: 20px;
-	margin-bottom:40px;
-}

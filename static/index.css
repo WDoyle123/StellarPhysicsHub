@@ -105,3 +105,17 @@ table {
     white-space: wrap; /* Prevents wrapping of table contents */
 }
 
+.footer {
+  position: ;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #1e2023;
+  color: white;
+  text-align: center;
+  padding: 20px 0;
+}
+
+.footer p {
+	margin-top: 20px;
+}

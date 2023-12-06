@@ -128,7 +128,7 @@ td {
     .welcome-container, .notes-section, .star-details-section {
         padding: 15px;
     }
-    
+   
     .welcome-section p, .notes-section li {
         font-size: 14px;
     }
@@ -141,4 +141,5 @@ td {
 	display:block;
     }
 }
+
 
