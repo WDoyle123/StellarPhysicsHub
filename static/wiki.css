@@ -6,6 +6,7 @@ body {
 }
 
 main {
+	flex-grow: 1;
     margin: 20px;
     color:black;
     background-color:black;
@@ -21,6 +22,10 @@ main {
     width: 800px;
 }
 
+.welcome-section{
+	margin-bottom:40px;
+}
+
 .welcome-section h1, .welcome-section h2 {
     color: #0077cc;
     margin-bottom: 20px;
@@ -30,6 +35,7 @@ main {
 
 .welcome-section li {
 	list-style-type: none;
+	margin-bottom:5px;
  	
 }
 
@@ -139,7 +145,14 @@ td {
 
     .three_column {
 	display:block;
+	text-align:center;
     }
+
+    .welcome-section
+    {
+	    margin-bottom: 20px;
+    }
+
 }
 
 

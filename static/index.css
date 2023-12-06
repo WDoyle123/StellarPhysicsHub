@@ -9,7 +9,6 @@ body, html {
 
 
 main {
-	height:100%;
 	flex-grow: 1;
     margin: 20px;
     color: black;
