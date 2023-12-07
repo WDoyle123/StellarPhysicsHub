@@ -2,7 +2,7 @@
 
 **Disclaimer**: This demo is not updated as frequently as this repository and could be a few commits or many behind.
 
-[StellarPhysicsHub Live Demo](http://wdoyle123.pythonanywhere.com/)
+[StellarPhysicsHub Live Demo](https://www.stellarphysicshub.com/)
 
 ![demo](demo/demo2.gif)
 
