@@ -99,6 +99,7 @@ main {
 }
 
 .button {
+
     padding: 5px 0px;
     background-color: #0077cc;
     border: none;
@@ -106,12 +107,11 @@ main {
     cursor: pointer;
     font-weight:Bold;
     color: white;
-    transition: all 0.3s ease 0s;
+   transition: all 0.3s ease 0s;
+
 }
 
 .button-2 {
-	margin-top: 20px;
-	padding-top: 20px;
     padding: 5px 0px;
     background-color: red;
     border: none;
@@ -120,6 +120,7 @@ main {
     font-weight:Bold;
     color: white;
     transition: all 0.3s ease 0s;
+    margin-bottom:10px;
 }
 
 .button a {
@@ -155,6 +156,10 @@ a {
 
 a:hover {
     text-decoration: underline;
+}
+
+.spacing {
+	margin-bottom:10px;
 }
 
 .form {

@@ -9,7 +9,7 @@
 <section class="welcome-section">
             <h1>Login</h1>
 
-<form class='form' method="POST" action="">
+<div class='form' method="POST" action="">
 
     <div class='form-group'>
         {{ form.hidden_tag() }}
@@ -23,12 +23,14 @@
     <div class='button'>
         {{ form.submit(class='button') }}
     </div>
+    <div class=spacing>
+    </div>
 
     <div class='button-2'>
 	<a href='/register'>Register</a>
     </div>
 
-</form>
+</div>
 
 </section>
     </div>

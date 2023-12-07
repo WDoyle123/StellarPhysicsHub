@@ -3,10 +3,14 @@
 /* Main content area styling */
 body {
     background-color: black;
+    height:100%;
 }
 
 main {
-    margin: 20px;
+	margin-top:20px;
+	display:flex;
+	flex-direction: column;
+	flex-grow: 1;
     color: black;
     background-color: black;
 }
@@ -23,6 +27,10 @@ li {
     width: clamp(300px, 80vw, 1440px); /* Dynamic width */
     display: block;
     margin: 0 auto;
+}
+
+.star-details-section {
+	margin-bottom:20px;
 }
 
 .frame {
@@ -97,3 +105,6 @@ table {
     white-space: wrap; /* Prevents wrapping of table contents */
 }
 
+main button {
+	margin-bottom:20px;
+}
