@@ -18,7 +18,6 @@ StellarPhysicsHub is a Flask-based web application designed for astronomy enthus
 - **SQLAlchemy**: Employs SQLAlchemy as the ORM (Object-Relational Mapping) layer, facilitating database operations like querying, inserting, and updating records.
 - **SQLite Database**: Incorporates SQLite, a lightweight database, avoiding the need for a separate server.
 - **Search Functionality**: Implements a search feature, allowing users to find constellations and asterisms stored in the SQLite database.
-- **User Contributions**: Supports user contributions, enabling enthusiasts to add new data about celestial bodies.
 - **Dynamic Content Rendering**: Uses Jinja2 templating for rendering dynamic content fetched from the SQLite database on the frontend.
 - **Interactive 3D Visualisations**: Uses [StarScholar3D](https://github.com/WDoyle123/StarScholar3D) for interactive 3D visualisations of the constellations and asterisms.
 - **Responsive Design**: Ensures a responsive and accessible web interface.
