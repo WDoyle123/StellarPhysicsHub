@@ -6,26 +6,25 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
+
     <header>
         <a href='/' class='logo'>StellarPhysicsHub</a>
-	        <!-- Search Bar -->
-		<form action="/search" method="get">
-    <input type="search" name="query" placeholder="Search..." list="search-options" autocomplete='off'>
-    <datalist id="search-options">
-    {% for object in objects %}
-    <option value='{{ object }}'>
-    {% endfor %}
-    </datalist>
-    <button type="submit">Search</button>
-</form>
-
-        <nav>
-            <ul class='nav_links'>
-                <li><a href='/wiki'>Wiki</a></li>
-                <li><a href='/login'>Login</a></li>
-            </ul>
-        </nav>
+	<form action="/search" method="get">
+    	<input type="search" name="query" placeholder="Search..." list="search-options" autocomplete='off'>
+		    <datalist id="search-options">
+			    {% for object in objects %}
+			    <option value='{{ object }}'>
+			    {% endfor %}
+		    </datalist>
+	    <button type="submit">Search</button>
+	</form>
+	        <nav>
+	            <ul class='nav_links'>
+	                <li><a href='/wiki'>Wiki</a></li>
+	            </ul>
+	        </nav>
     </header>
+
     {% block body %}{% endblock %}
 </body>
 

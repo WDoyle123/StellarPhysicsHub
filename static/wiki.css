@@ -1,5 +1,9 @@
 /* body.css */
 
+nav li {
+    margin-left: 5rem; /* Relative unit */
+}
+
 /* Main content area styling */
 body {
 	background-color:black;

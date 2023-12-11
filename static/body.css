@@ -15,9 +15,14 @@ main {
     background-color: black;
 }
 
-li {
-    margin-left: 1rem; /* Relative unit */
+nav li {
+    margin-left: 5rem; /* Relative unit */
 }
+
+li {
+	margin-left: 1rem;
+}
+
 
 .welcome-container, .notes-section, .star-details-section {
     background-color: #1e2023;

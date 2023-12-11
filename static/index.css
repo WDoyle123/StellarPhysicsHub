@@ -16,7 +16,7 @@ main {
 }
 
 li {
-    margin-left: 1rem; /* Relative unit */
+    margin-left: 5rem; /* Relative unit */
 }
 
 .welcome-container, .notes-section, .star-details-section {
