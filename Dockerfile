@@ -1,37 +1,17 @@
-# Builder 
-FROM python:alpine3.19 AS builder-image
+FROM python:3.9-alpine
 
-# Install dependencies
-RUN apk add --no-cache build-base && \
-	python -m venv /opt/venv
+WORKDIR /app
 
-# virtual environment setup
-ENV PATH="/opt/venv/bin:$PATH"
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+COPY . /app
 
-# Runner
-FROM python:alpine3.19 AS runner-image
+RUN apk update && \
+    apk add --no-cache build-base libstdc++ && \
+    pip install --no-cache-dir -r requirements.txt && \
+    apk del build-base
 
-# copy venv from the build stage
-COPY --from=builder-image /opt/venv /opt/venv
+EXPOSE 5000
 
-RUN apk add --no-cache libstdc++ && \
-    pip install --no-cache-dir pandas gunicorn flask
+ENV FLASK_APP=app.py
+ENV FLASK_RUN_HOST=0.0.0.0
 
-# Set env variables
-ENV VIRTUAL_ENV=/opt/venv \ 
-	PATH="/opt/venv/bin:$PATH" \
-	FLASK_APP=app.py \
-	FLASK_RUN_HOST=0.0.0.0
-
-COPY . .
-
-EXPOSE 80
-
-# make non root user and switch to it
-RUN adduser -D myuser
-USER myuser
-
-CMD ["gunicorn", "-b", "0.0.0.0:80", "app:app"]
-
+CMD ["flask", "run"]
