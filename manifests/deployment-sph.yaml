@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sph-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sph
+  template:
+    metadata:
+      labels:
+        app: sph
+    spec:
+      containers:
+        - name: sph-container
+          image: wdoyle123/sph
+          ports:
+            - containerPort: 5000
+

@@ -1,0 +1,25 @@
+# sph-ingress.yaml (updated)
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: sph-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+spec:
+  tls:
+    - hosts:
+        - sph.williamdoyle.co.uk
+      secretName: sph-tls
+  rules:
+    - host: sph.williamdoyle.co.uk
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: sph-service
+                port:
+                  number: 5000
+
