@@ -1,4 +1,3 @@
-# sph-ingress.yaml (updated)
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -8,6 +7,7 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /
     cert-manager.io/cluster-issuer: letsencrypt-prod
 spec:
+  ingressClassName: nginx  # <-- Add this line
   tls:
     - hosts:
         - sph.williamdoyle.co.uk
@@ -22,5 +22,5 @@ spec:
               service:
                 name: sph-service
                 port:
-                  number: 5000
+                  number: 80
 
